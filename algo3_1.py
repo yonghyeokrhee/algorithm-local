@@ -1,33 +1,37 @@
 import itertools
+from collections import deque
+
 def solution(s):
-    string = s
-    result = []
-    cutoneside = []
-    def cutout(string, result):
-        if string == '':
+
+    forward_result = []
+    backward_result = deque([])
+
+    def cutoff(s):
+
+        if s == '':
             return
         else:
             i = 0
-            while string[:i + 1] != string[-(i + 1):]:
+            while s[:i + 1] != s[-(i + 1):]:
                 i += 1
-            collect = string[:i + 1]
-            cutoneside.append(string[i+1:])
-            string = string[i + 1:-(i + 1)]
-            result.append(collect)
-            cutout(string, result)
-            print(cutoneside[-1])
-        return result,cutoneside
+            palindrome = s[:i + 1]
+            forward_result.append(palindrome)
 
-    cutout(string,result)
-    if cutoneside[-1] is '':
-        for item in itertools.chain(reversed(result)):
-            result.append(item)
-        del(result[(len(result)//2) - 1])
-    else:
-        for item in itertools.chain(reversed(result)):
-            result.append(item)
-    answer = result
-    print(answer)
-    return answer
+            s = s[i+1:]
+            snip_ind = s.find(palindrome)
+            print(snip_ind)
+
+            backward_result.appendleft(s[snip_ind:])
+            s = s[:snip_ind]
+            print(forward_result)
+            print(backward_result)
+            cutoff(s)
+
+            forward_result.append(backward_result.popleft())
+            print(forward_result)
+        return
+
+    cutoff(s)
+
 
 solution('abcxyasdfxyabc')
