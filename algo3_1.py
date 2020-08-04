@@ -23,8 +23,7 @@ def solution(s):
 
             backward_result.appendleft(s[snip_ind:])
             s = s[:snip_ind]
-            print(forward_result)
-            print(backward_result)
+            # recursive function call
             cutoff(s)
 
             forward_result.append(backward_result.popleft())
