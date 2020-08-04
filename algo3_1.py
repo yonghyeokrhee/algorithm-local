@@ -30,4 +30,4 @@ def solution(s):
     print(answer)
     return answer
 
-solution('abc')
+solution('abcxyasdfxyabc')
