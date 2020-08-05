@@ -20,14 +20,19 @@ def solution(s):
             s = s[i+1:]
             snip_ind = s.find(palindrome)
             print(snip_ind)
-
-            backward_result.appendleft(s[snip_ind:])
+            if snip_ind != -1 :
+                backward_result.appendleft(s[snip_ind:])
+            else:
+                pass
             s = s[:snip_ind]
             # recursive function call
             cutoff(s)
-
-            forward_result.append(backward_result.popleft())
-            print(forward_result)
+            try:
+                forward_result.append(backward_result.popleft())
+            except IndexError:
+                print("No more value left from deque...")
+        print(forward_result)
+            
         return
 
     cutoff(s)
