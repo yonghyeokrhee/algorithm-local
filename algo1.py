@@ -11,8 +11,9 @@ def solution(lottos, win_nums):
 
     lottos_ar = np.array(lottos)
     lottos_hidden = lottos_ar[[i for i, val in enumerate(lottos) if val == 0]]
+    
+    '''
     lottos_reveal = lottos_ar[[i for i, val in enumerate(lottos) if val != 0]]
-
     bowls = np.arange(1, 46)
     possibles = bowls[[i for i, val in enumerate(bowls) if val not in lottos_reveal]]
     possible_combs = np.asarray(list(itertools.combinations(possibles, len(lottos_hidden))))
@@ -21,9 +22,10 @@ def solution(lottos, win_nums):
     for i in possible_combs:
         luck = df.win_nums.isin(i).sum()
         luck_combs.append(luck)
-
+    
     max_gotcha = max(luck_combs)
-
+    '''
+    max_gotcha = len(lottos_hidden)
     answer = [6 - (max_gotcha+min_gotcha) + 1, 6 - min_gotcha + 1]
     print(answer)
     return answer
