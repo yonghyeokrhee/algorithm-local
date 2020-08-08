@@ -67,14 +67,13 @@ from collections import deque
 import numpy as np
 import random
 import time
-
 from collections import deque
 import numpy as np
 import random
 
 
 def solution(arr):
-
+    timeout = time.time() + 5
     while True:
         print('i am working')
         popped = []
@@ -99,12 +98,13 @@ def solution(arr):
             print(popped)
             answer = True
             break
-        else:
-            print(popped)
-            pass
+        elif time.time() > timeout:
+            answer = False
+            break
+
 
     print(answer)
     return
 
-solution([1,3,2])
-#solution([3,1,2])
+#solution([1,3,2])
+solution([3,1,2])
