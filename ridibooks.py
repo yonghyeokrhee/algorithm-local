@@ -34,26 +34,77 @@
 #     return i
 # solution(20)
 
-import itertools
+# import itertools
+# import numpy as np
+#
+# def solution(foods):
+#     food_len = len(foods)
+#     i = 0
+#     for itr in itertools.combinations(np.arange(1, food_len), 2):
+#
+#         pig1 = np.asarray(foods[:itr[0]]).sum()
+#         pig2 = np.asarray(foods[itr[0]:itr[1]]).sum()
+#         pig3 = np.asarray(foods[itr[1]:]).sum()
+#
+#
+#         if pig1 == pig2 == pig3:
+#             i += 1
+#         else:
+#             pass
+#     print(i)
+#     answer = i
+#     return answer
+
+
+# solution([1, 2, 3, 0, 3])
+
+from collections import deque
 import numpy as np
+import random
+import time
 
-def solution(foods):
-    food_len = len(foods)
-    i = 0
-    for itr in itertools.combinations(np.arange(1, food_len), 2):
+from collections import deque
+import numpy as np
+import random
+import time
 
-        pig1 = np.asarray(foods[:itr[0]]).sum()
-        pig2 = np.asarray(foods[itr[0]:itr[1]]).sum()
-        pig3 = np.asarray(foods[itr[1]:]).sum()
+from collections import deque
+import numpy as np
+import random
 
 
-        if pig1 == pig2 == pig3:
-            i += 1
+def solution(arr):
+
+    while True:
+        print('i am working')
+        popped = []
+        temp_bucket = []
+        ordered = np.arange(len(arr)) + 1
+        q = deque(ordered)
+
+        while len(popped) != 3:
+            if (len(temp_bucket) == 0) & (len(q) != 0):
+                temp_bucket.append(q.popleft())
+            else:
+                while len(temp_bucket) != 0:
+                    my_choice = random.choice([0, 1])
+                    if my_choice == 1:
+                        popped.append(temp_bucket.pop())
+                    else:
+                        if len(q) != 0:
+                            temp_bucket.append(q.popleft())
+                        else:
+                            pass
+        if popped == arr:
+            print(popped)
+            answer = True
+            break
         else:
+            print(popped)
             pass
-    print(i)
-    answer = i
-    return answer
 
+    print(answer)
+    return
 
-solution([1, 2, 3, 0, 3])
+solution([1,3,2])
+#solution([3,1,2])
