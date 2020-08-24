@@ -71,15 +71,18 @@ from collections import deque
 import numpy as np
 import random
 
+#True if you can pop one element from left of ordered list and push it to empty list from right in a desired manner
+# [1,2,3] --> [3,1,2] False
+# [1,2,3] --> [1,3,2] True
 
 def solution(arr):
     timeout = time.time() + 5
     while True:
         print('i am working')
         popped = []
-        temp_bucket = []
         ordered = np.arange(len(arr)) + 1
         q = deque(ordered)
+
 
         while len(popped) != 3:
             if (len(temp_bucket) == 0) & (len(q) != 0):
@@ -106,5 +109,5 @@ def solution(arr):
     print(answer)
     return
 
-#solution([1,3,2])
-solution([3,1,2])
+solution([1,3,2])
+#solution([3,1,2])
