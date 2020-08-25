@@ -17,19 +17,23 @@ def solution(arr):
         if n == 1:
             return arr
         elif n == 2:
-            arr1 = np.array(arr)
-            arr2 = arr[::-1]
-            return [arr, arr2]
+            arr_r = arr[::-1]
+            print([arr,arr_r])
+            return [arr, arr_r]
         else:
             for i in range(n-1):
                 lefty = arr[:i+1]
                 righty = arr[i+1:n]
-                print(reverse(lefty))
-
-                answer.append(reverse(lefty)[0])
+                #print(lefty)
+                #print(righty)
+                for elem in reverse(righty):
+                    print(elem)
+                    print('combine:{}'.format(elem + lefty))
+                #print('combine:{},{}'.format(reverse(righty),reverse(lefty)))
+                #answer.append(reverse(lefty)[0])
     reverse(arr)
     return answer
 
 
-print(solution([1, 3, 2]))
+solution([1, 2,3])
 # solution([3,1,2])
