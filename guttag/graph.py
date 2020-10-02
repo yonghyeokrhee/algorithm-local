@@ -62,4 +62,50 @@ def testGreedys(maxWeights=20):
     print '\nUse greedy by density for knapsack of size maxWeight'
     testGreedy(Items, maxWeights, density)
 
-testGreedys()
+#testGreedys()
+
+def chooseBest(pset, constraint, getVal, getWeight):
+    bestVal = 0.0
+    bestSet = None
+    for Items in pset:
+        ItemsVal = 0.0
+        ItemsWeight = 0.0
+        for item in Items:
+            ItemsVal += getVal(item)
+            ItemsWeight += getWeight(item)
+        if ItemsWeight <= constraint and ItemsVal > bestVal:
+            bestVal = ItemsVal
+            bestSet = Items
+    return (bestSet, bestVal)
+
+def getBinaryRep(n, numDigits):
+    result = ''
+    while n> 0:
+        result = str(n%2) + result
+        n = n//2
+    if len(result) > numDigits:
+        raise ValueError('not enough digits')
+    for i in range(numDigits - len(result)):
+        result = '0' + result
+    return result
+
+def genPowerSet(L):
+    powerSet = []
+    for i in range(0, 2**len(L)):
+        binStr = getBinaryRep(i, len(L))
+        subset = []
+        for j in range(len(binStr)):
+            if binStr[j] == '1':
+                subset.append(L[j])
+        powerSet.append(subset)
+    return powerSet
+
+def testBest(maxWeight = 20):
+    Items = buildItems()
+    pset = genPowerSet(Items)
+    taken , val = chooseBest(pset, maxWeight, Item.getValue, Item.getWeight)
+    print('Total value of items taken = ' + str(val))
+    for item in taken:
+        print(item)
+
+testBest()
