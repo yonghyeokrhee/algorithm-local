@@ -1,15 +1,19 @@
 import copy
 import time
+
 start_time = time.time()
 
-# double count for i = 5 and i = 7 because they have same condition
-# unnecessary second while loop after first loop condition not met - waste of time
+
 def trapping_water(inputs):
+    # local variables
     vol = 0
     record = []
-    max = len(inputs)
+    end = len(inputs)
+
+    # outer loop
     for i in range(len(inputs) - 1):
         if i == 0:
+            print("skip 0 index")
             continue
         # running loop
         k = copy.copy(i) - 1
@@ -18,14 +22,17 @@ def trapping_water(inputs):
         while inputs[i] >= inputs[k] and k >= 0:
             k -= 1
             if k == -1:
+                print("k was -1")
+                print("skip j inner loop and k was %s" % k)
                 break
         # end for k loop
-        # give a condition only if k > 0
-        if k != -1:
-            # start of j loop
+        # start of j inner loop
+        else:
+            print("=============")
+            print("j inner loop started and i was %s" % i)
             while inputs[i] >= inputs[j] and j <= len(inputs):
                 j += 1
-                if j == max:
+                if j == end:
                     break
             if not (k > 0 and j < len(inputs)):
                 continue
@@ -35,11 +42,7 @@ def trapping_water(inputs):
                     right_bar = inputs[j]
                     vol += (j - k - 1) * (min(right_bar, left_bar) - inputs[i])
                     record.append(k)
-                else:
-                    pass
-        else:
-            print("k was -1")
-            pass
+
     print(vol)
     return vol
 
