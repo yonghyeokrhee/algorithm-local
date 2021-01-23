@@ -5,23 +5,26 @@ import copy
 def trapping_water(inputs):
     vol = 0
     record = []
-    for i in range(len(inputs)):
+    max = len(inputs)
+    for i in range(len(inputs)-1):
         if i == 0:
             continue
+        # running loop
         k = copy.copy(i) - 1
+        j = copy.copy(i) + 1
+
         while inputs[i] >= inputs[k] and k >= 0:
             k -= 1
-        if k == -1:
-            continue
-        j = copy.copy(i) + 1
-        try:
-            while inputs[i] >= inputs[j] and j <= len(inputs):
-                j += 1
-        except IndexError as e:
-            print('out of index')
-            continue
+            if k == -1:
+                break
+        # end for k loop
 
-        if not (k > 0 or j < len(inputs)):
+        # start of j loop
+        while inputs[i] >= inputs[j] and j <= len(inputs):
+            j += 1
+            if j == max:
+                break
+        if not (k > 0 and j < len(inputs)):
             continue
         else:
             if k not in record:

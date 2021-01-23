@@ -58,20 +58,15 @@
 
 # solution([1, 2, 3, 0, 3])
 
-from collections import deque
-import numpy as np
-import random
-import time
-
-from collections import deque
-import numpy as np
 import random
 import time
 from collections import deque
-import numpy as np
-import random
 
-#True if you can pop one element from left of ordered list and push it to empty list from right in a desired manner
+import numpy as np
+
+
+#wrtie an algorithm to verify a following rule
+#True if you can pop one element from left of ordered list and push it to an empty list from right in a desired manner
 # [1,2,3] --> [3,1,2] False
 # [1,2,3] --> [1,3,2] True
 
@@ -110,4 +105,4 @@ def solution(arr):
     return
 
 solution([1,3,2])
-#solution([3,1,2])
+#solution([3,1,2]) = False
